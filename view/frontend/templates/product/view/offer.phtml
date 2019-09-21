@@ -1,0 +1,117 @@
+<?php
+@codingStandardsIgnoreFile
+/** @var \BroSolutions\CustomOffer\Block\Catalog\Product\View\CustomButton $block */
+?>
+
+<script>
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal',
+        ],
+        function (
+            $,
+            modal
+        ) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: false,
+                buttons: [{
+                    text: $.mage.__('Close without save'),
+                    class: '',
+                    click: function () {
+                        this.closeModal();
+                    }
+                }]
+            };
+
+            var popup = modal(options, $('#popup-modal'));
+            $("#offer-button").on('click', function () {
+                $("#popup-modal").modal("openModal");
+            });
+        }
+    );
+</script>
+
+
+<button data-mage-init='{"": {}}'>
+    <a href="#" id="offer-button">Offer Button</a>
+</button>
+
+<div id="popup-modal">
+    <form class="form"
+          action="<?= $block->escapeUrl($block->getFormAction()) ?>"
+          id="contact-form"
+          method="post"
+          data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>"
+          data-mage-init='{"validation":{}}'>
+
+        <fieldset class="fieldset">
+
+            <div class="field email required">
+                <label class="label" for="email"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
+                <div class="control">
+                    <input name="email"
+                           id="email"
+                           title="<?= $block->escapeHtmlAttr(__('Email')) ?>"
+                           value="<?= $block->escapeHtmlAttr($this->helper('Magento\Contact\Helper\Data')->getPostValue('email') ?:
+                               $this->helper('Magento\Contact\Helper\Data')->getUserEmail()) ?>"
+                           class="input-text"
+                           type="email"
+                           placeholder="Enter your Your Email"
+                           data-validate="{required:true, 'validate-email':true}"/>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" for="text"><span><?= $block->escapeHtml(__('Another Store Link')) ?></span></label>
+                <div class="control">
+                    <input name="another_store_link"
+                           id="another_store_link"
+                           title="<?= $block->escapeHtmlAttr(__('Another Store Link')) ?>"
+                           value="<?= $block->escapeHtmlAttr($this->helper('Magento\Contact\Helper\Data')->getPostValue('Another Store Link')) ?>"
+                           class="input-text"
+                           type="text"
+                           data-validate="{'validate-no-html-tags':true}"
+                           placeholder="Enter your Store Link"/>
+                </div>
+            </div>
+            <div class="field required">
+                <label class="label" for="your_price"><span><?= $block->escapeHtml(__('Your price')) ?></span></label>
+                <div class="control">
+                    <input name="your_price"
+                           id="your_price"
+                           title="<?= $block->escapeHtmlAttr(__('Your price')) ?>"
+                           value="<?= $block->escapeHtmlAttr($this->helper('Magento\Contact\Helper\Data')->getPostValue('Your price')) ?>"
+                           class="input-text number"
+                           type="number"
+                           data-validate="{'required-number':true , 'validate-greater-than-zero':true}"
+                           placeholder="Enter your price"/>
+                </div>
+            </div>
+            <div class="field required">
+                <label class="label" for="offer_qty"><span><?= $block->escapeHtml(__('Qty')) ?></span></label>
+                <div class="control">
+                    <input name="qty"
+                           id="qty"
+                           title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
+                           value="<?= $block->escapeHtmlAttr($this->helper('Magento\Contact\Helper\Data')->getPostValue('Qty')) ?>"
+                           class="input-text qty"
+                           type="number"
+                           data-validate="{'required-number':true , 'validate-greater-than-zero':true}"
+                           placeholder="Enter Qty"/>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="actions-toolbar">
+            <div class="primary">
+                <input type="hidden" name="hideit" id="hideit" value=""/>
+                <button type="submit" title="<?= $block->escapeHtmlAttr(__('Save')) ?>" class="action submit primary">
+                    <span><?= $block->escapeHtml(__('Save')) ?></span>
+                </button>
+            </div>
+        </div>
+
+    </form>
+</div>

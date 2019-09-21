@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table comment="brosolutions_customoffer_offer Table" engine="innodb" name="brosolutions_customoffer_offer" resource="default">
+        <column comment="Offer Id" identity="true" name="offer_id" nullable="false" padding="6" unsigned="false" xsi:type="int"/>
+        <constraint referenceId="PRIMARY" xsi:type="primary">
+            <column name="offer_id"/>
+        </constraint>
+        <column length="60" name="email" nullable="false" xsi:type="varchar"/>
+        <column name="another_store_link" nullable="false" xsi:type="text"/>
+        <column name="your_price" nullable="false" xsi:type="text"/>
+        <column name="answer_to_offer" nullable="false" xsi:type="text"/>
+        <column name="qty" nullable="false" xsi:type="int"/>
+        <column name="offer_status" nullable="false" xsi:type="int"/>
+    </table>
+</schema>

@@ -1,0 +1,13 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="BroSolutions_CustomOffer::offer"
+             title="Custom Offer"
+             translate="title"
+             module="BroSolutions_CustomOffer"
+             sortOrder="10"
+             parent="Magento_Backend::marketing"
+             action="customoffer"
+             resource="BroSolutions_CustomOffer::offer"/>
+    </menu>
+</config>
+

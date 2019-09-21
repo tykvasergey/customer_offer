@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="CustomOfferUiDataProviderEnquiryFormModifierPool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="enquiry_data" xsi:type="array">
+                    <item name="class" xsi:type="string">BroSolutions\CustomOffer\Ui\DataProvider\Offer\Form\Modifier\OfferData</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="BroSolutions\CustomOffer\Model\DataProvider">
+        <arguments>
+            <argument name="pool" xsi:type="object">CustomOfferUiDataProviderEnquiryFormModifierPool</argument>
+        </arguments>
+    </type>
+
+
+    <virtualType name="CustomOfferDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <!--    <virtualType name="CustomOfferDataProvider" type="BroSolutions\CustomOffer\Ui\DataProvider\DataProvider">-->
+        <!--    <virtualType name="CustomOfferDataProvider" type="BroSolutions\CustomOffer\Model\DataProvider">-->
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">BroSolutions\CustomOffer\Model\ResourceModel\Offer\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">CustomOfferGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="CustomOfferGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="BroSolutions\CustomOffer\Model\ResourceModel\Offer\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">brosolutions_customoffer_offer</argument>
+            <argument name="resourceModel" xsi:type="string">BroSolutions\CustomOffer\Model\ResourceModel\Offer</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="customoffer_grid_data_source" xsi:type="string">BroSolutions\CustomOffer\Model\ResourceModel\Offer\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="BroSolutions\CustomOffer\Controller\Adminhtml\Index\MassDelete">
+        <arguments>
+            <argument name="successMessage" xsi:type="string" translate="true">A total of %1 record(s) have been deleted.</argument>
+            <argument name="errorMessage" xsi:type="string" translate="true">An error occurred while deleting record(s).</argument>
+        </arguments>
+    </type>
+
+        <type name="BroSolutions\CustomOffer\Model\ResourceModel\Offer\Grid\Collection">
+            <arguments>
+                <argument name="mainTable" xsi:type="string">brosolutions_customoffer_offer</argument>
+                <argument name="eventPrefix" xsi:type="string">brosolutions_customoffer_grid_collection</argument>
+                <argument name="eventObject" xsi:type="string">brosolutions_customoffer_collection</argument>
+                <argument name="resourceModel" xsi:type="string">BroSolutions\CustomOffer\Model\ResourceModel\Offer</argument>
+            </arguments>
+        </type>
+</config>
